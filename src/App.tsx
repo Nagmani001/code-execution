@@ -1,36 +1,23 @@
-import { Editor } from "@monaco-editor/react";
 import Nav from "./components/nav";
 import { PanelGroup } from "react-resizable-panels";
 import { Panel } from "react-resizable-panels";
 import { PanelResizeHandle } from "react-resizable-panels";
-import { useAtomValue, useSetAtom } from "jotai";
-import { codeAtom, language, output } from "./store/store";
+import { useAtomValue } from "jotai";
+import { output } from "./store/store";
 import TerminalOutput from "./components/console";
+import { useTheme } from "./components/themeProvider";
+import ThemedEditor from "./components/editor";
 
 export default function App() {
   const out = useAtomValue(output);
-  const setCode = useSetAtom(codeAtom);
-  const lang = useAtomValue(language);
+  const { theme } = useTheme();
   return <div className="flex flex-col gap-y-4">
     <div className="">
       <Nav />
     </div>
     <PanelGroup direction="horizontal">
       <Panel className="">
-        <Editor
-          defaultLanguage="javascript"
-          language={lang}
-          onChange={(value) => setCode((prev) => {
-            return {
-              ...prev,
-              source_code: value || ""
-            }
-          })}
-          options={{
-            minimap: { enabled: false },
-            automaticLayout: true,
-          }}
-        />
+        <ThemedEditor theme={theme} />
       </Panel>
       <PanelResizeHandle>
         <div className="bg-slate-200 h-screen w-2"></div>
