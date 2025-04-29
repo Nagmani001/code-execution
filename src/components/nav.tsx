@@ -4,9 +4,12 @@ import SelectLanguage from "./selectLanguage";
 import { Button } from "./ui/button";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ModeToggle } from "./modeToggle";
+import { useState } from "react";
+import Loading from "./loading";
 
 
 export default function Nav() {
+  const [loading, setLoading] = useState(false);
   const code = useAtomValue(codeAtom);
   const setOutput = useSetAtom(output);
   return <div className="flex justify-between p-2 px-2 w-full h-[80px]">
@@ -17,7 +20,7 @@ export default function Nav() {
         </svg>
       </div>
       <div className="font-extrabold text-xl ">
-        CodeSphere
+        Code Arena
       </div>
     </div>
     <div className="flex items-center">
@@ -25,13 +28,16 @@ export default function Nav() {
         variant="success"
         className="bg-green-500 hover:bg-green-400"
         onClick={async () => {
-          const response = await axios.post("http://13.235.67.44:2358/submissions?base64_encoded=false&wait=true", code);
-          console.log("request sent")
+          setLoading(true)
+          const response = await axios.post("http://localhost:3000/submit", {
+            code,
+          });
+          console.log(response.data);
           //@ts-ignore
           setOutput(response.data);
-          console.log("got response ")
+          setLoading(false);
         }}
-      >Run</Button>
+      >{loading ? <Loading /> : <div className="font-bold text-md">Run</div>}</Button>
     </div>
     <div className="flex items-center gap-x-2">
       <ModeToggle />

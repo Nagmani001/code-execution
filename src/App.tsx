@@ -21,7 +21,7 @@ export default function App() {
           <ThemedEditor theme={theme} />
         </Panel>
         <PanelResizeHandle>
-          <div className="h-screen w-2 border-1 border-black"></div>
+          <div className="h-screen w-1 bg-slate-400 dark:bg-slate-200"></div>
         </PanelResizeHandle>
         <Panel>
           <div className="h-screen">

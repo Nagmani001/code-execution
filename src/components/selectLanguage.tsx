@@ -48,35 +48,35 @@ export default function SelectLanguage() {
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center">{renderLang(lang)}</DropdownMenuTrigger>
       <DropdownMenuContent>
-        <Button onClick={() => {
+        <Button className="w-full pr-10 " variant="secondary" onClick={() => {
           onClick(63)
           setLang("javascript")
         }}>
           <DropdownMenuItem><Javascript /></DropdownMenuItem>
         </Button>
         <DropdownMenuSeparator />
-        <Button onClick={() => {
+        <Button className="w-full pr-10 " variant="secondary" onClick={() => {
           onClick(73)
           setLang("typescript")
         }}>
           <DropdownMenuItem><Typescript /></DropdownMenuItem>
         </Button>
         <DropdownMenuSeparator />
-        <Button onClick={() => {
+        <Button className="w-full pr-20" variant="secondary" onClick={() => {
           onClick(10)
           setLang("cpp")
         }}>
           <DropdownMenuItem><Cpp /></DropdownMenuItem>
         </Button>
         <DropdownMenuSeparator />
-        <Button onClick={() => {
+        <Button className="w-full pr-20" variant="secondary" onClick={() => {
           onClick(73)
           setLang("rust")
         }}>
           <DropdownMenuItem><Rust /></DropdownMenuItem>
         </Button>
         <DropdownMenuSeparator />
-        <Button onClick={() => {
+        <Button className="w-full pr-15 " variant="secondary" onClick={() => {
           onClick(60)
           setLang("go")
         }}>
