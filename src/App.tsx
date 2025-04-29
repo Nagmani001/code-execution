@@ -1,14 +1,16 @@
 import { Editor } from "@monaco-editor/react";
-import { useState } from "react";
 import Nav from "./components/nav";
-import Console from "./components/console";
 import { PanelGroup } from "react-resizable-panels";
 import { Panel } from "react-resizable-panels";
 import { PanelResizeHandle } from "react-resizable-panels";
+import { useAtomValue, useSetAtom } from "jotai";
+import { codeAtom, language, output } from "./store/store";
+import TerminalOutput from "./components/console";
 
 export default function App() {
-  const [code, setCode] = useState("");
-  console.log(code)
+  const out = useAtomValue(output);
+  const setCode = useSetAtom(codeAtom);
+  const lang = useAtomValue(language);
   return <div className="flex flex-col gap-y-4">
     <div className="">
       <Nav />
@@ -17,14 +19,28 @@ export default function App() {
       <Panel className="">
         <Editor
           defaultLanguage="javascript"
-          onChange={(value) => setCode(value || "")}
+          language={lang}
+          onChange={(value) => setCode((prev) => {
+            return {
+              ...prev,
+              source_code: value || ""
+            }
+          })}
+          options={{
+            minimap: { enabled: false },
+            automaticLayout: true,
+          }}
         />
       </Panel>
       <PanelResizeHandle>
         <div className="bg-slate-200 h-screen w-2"></div>
       </PanelResizeHandle>
       <Panel>
-        <Console />
+        <div className="h-ull">
+          {Object.keys(out).length === 0 ? <div>nothing</div> :
+            <TerminalOutput result={out} />
+          }
+        </div>
       </Panel>
     </PanelGroup>
   </div>

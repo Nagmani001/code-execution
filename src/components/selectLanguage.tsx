@@ -2,7 +2,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -11,21 +10,78 @@ import Typescript from "./typescript"
 import Rust from "./rust"
 import Golang from "./golang"
 import Cpp from "./cpp"
+import { Button } from "./ui/button"
+import { useAtom, useSetAtom } from "jotai"
+import { codeAtom, language } from "@/store/store"
+
 
 export default function SelectLanguage() {
+  const setCode = useSetAtom(codeAtom);
+  const [lang, setLang] = useAtom(language);
+
+  function onClick(id: number) {
+    setCode((prev) => {
+      return {
+        ...prev,
+        language_id: id
+      }
+    })
+
+  }
+  function renderLang(lang: string) {
+    switch (lang) {
+      case "javascript":
+        return <Javascript />
+      case "typescript":
+        return <Typescript />
+      case "rust":
+        return <Rust />
+      case "go":
+        return <Golang />
+      case "cpp":
+        return <Cpp />
+      default:
+        return <div>Select Language</div>
+    }
+  }
   return <div>
     <DropdownMenu>
-      <DropdownMenuTrigger>Select Language</DropdownMenuTrigger>
+      <DropdownMenuTrigger className="flex items-center">{renderLang(lang)}</DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel><Javascript /></DropdownMenuLabel>
+        <Button onClick={() => {
+          onClick(63)
+          setLang("javascript")
+        }}>
+          <DropdownMenuItem><Javascript /></DropdownMenuItem>
+        </Button>
         <DropdownMenuSeparator />
-        <DropdownMenuItem><Typescript /></DropdownMenuItem>
+        <Button onClick={() => {
+          onClick(73)
+          setLang("typescript")
+        }}>
+          <DropdownMenuItem><Typescript /></DropdownMenuItem>
+        </Button>
         <DropdownMenuSeparator />
-        <DropdownMenuItem><Cpp /></DropdownMenuItem>
+        <Button onClick={() => {
+          onClick(10)
+          setLang("cpp")
+        }}>
+          <DropdownMenuItem><Cpp /></DropdownMenuItem>
+        </Button>
         <DropdownMenuSeparator />
-        <DropdownMenuItem><Rust /></DropdownMenuItem>
+        <Button onClick={() => {
+          onClick(73)
+          setLang("rust")
+        }}>
+          <DropdownMenuItem><Rust /></DropdownMenuItem>
+        </Button>
         <DropdownMenuSeparator />
-        <DropdownMenuItem><Golang /></DropdownMenuItem>
+        <Button onClick={() => {
+          onClick(60)
+          setLang("go")
+        }}>
+          <DropdownMenuItem><Golang /></DropdownMenuItem>
+        </Button>
       </DropdownMenuContent>
     </DropdownMenu>
   </div>
