@@ -9,7 +9,7 @@ import { ModeToggle } from "./modeToggle";
 export default function Nav() {
   const code = useAtomValue(codeAtom);
   const setOutput = useSetAtom(output);
-  return <div className="flex justify-between p-2 px-2 w-full">
+  return <div className="flex justify-between p-2 px-2 w-full h-[80px]">
     <div className="flex items-center gap-x-2">
       <div className="font-extrabold ">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -20,7 +20,7 @@ export default function Nav() {
         CodeSphere
       </div>
     </div>
-    <div>
+    <div className="flex items-center">
       <Button
         variant="success"
         className="bg-green-500 hover:bg-green-400"

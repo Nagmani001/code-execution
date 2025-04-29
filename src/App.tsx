@@ -11,24 +11,26 @@ import ThemedEditor from "./components/editor";
 export default function App() {
   const out = useAtomValue(output);
   const { theme } = useTheme();
-  return <div className="flex flex-col gap-y-4">
+  return <div className="flex flex-col min-h-screen ">
     <div className="">
       <Nav />
     </div>
-    <PanelGroup direction="horizontal">
-      <Panel className="">
-        <ThemedEditor theme={theme} />
-      </Panel>
-      <PanelResizeHandle>
-        <div className="bg-slate-200 h-screen w-2"></div>
-      </PanelResizeHandle>
-      <Panel>
-        <div className="h-ull">
-          {Object.keys(out).length === 0 ? <div>nothing</div> :
-            <TerminalOutput result={out} />
-          }
-        </div>
-      </Panel>
-    </PanelGroup>
+    <div className="h-[calc(100vh-80px)] ">
+      <PanelGroup direction="horizontal">
+        <Panel className="">
+          <ThemedEditor theme={theme} />
+        </Panel>
+        <PanelResizeHandle>
+          <div className="h-screen w-2 border-1 border-black"></div>
+        </PanelResizeHandle>
+        <Panel>
+          <div className="h-screen">
+            {Object.keys(out).length === 0 ? <div>write some code and press on the run button to get output</div> :
+              <TerminalOutput result={out} />
+            }
+          </div>
+        </Panel>
+      </PanelGroup>
+    </div>
   </div>
 }
