@@ -56,14 +56,14 @@ export default function SelectLanguage() {
         </Button>
         <DropdownMenuSeparator />
         <Button className="w-full pr-10 " variant="secondary" onClick={() => {
-          onClick(73)
+          onClick(74)
           setLang("typescript")
         }}>
           <DropdownMenuItem><Typescript /></DropdownMenuItem>
         </Button>
         <DropdownMenuSeparator />
         <Button className="w-full pr-20" variant="secondary" onClick={() => {
-          onClick(10)
+          onClick(54)
           setLang("cpp")
         }}>
           <DropdownMenuItem><Cpp /></DropdownMenuItem>
