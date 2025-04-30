@@ -13,13 +13,11 @@ import Cpp from "./cpp"
 import { Button } from "./ui/button"
 import { useAtom, useSetAtom } from "jotai"
 import { codeAtom, language } from "@/store/store"
-import { defaultConsole } from "@/config"
 
 
 export default function SelectLanguage() {
   const setCode = useSetAtom(codeAtom);
   const [lang, setLang] = useAtom(language);
-  const [defConsole, setDefaultConsole] = useAtom(defaultConsole);
 
   function onClick(id: number) {
     setCode((prev) => {
