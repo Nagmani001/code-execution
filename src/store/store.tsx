@@ -8,3 +8,4 @@ export const codeAtom = atom({
 export const language = atom("javascript");
 
 export const output = atom({});
+

@@ -25,7 +25,9 @@ export default function App() {
         </PanelResizeHandle>
         <Panel>
           <div className="h-screen">
-            {Object.keys(out).length === 0 ? <div>write some code and press on the run button to get output</div> :
+            {Object.keys(out).length === 0 ? <div className="text-slate-600 p-4 dark:text-white">
+              {`write some code or edit the existing code and click on run to see output ...`}
+            </div> :
               <TerminalOutput result={out} />
             }
           </div>
