@@ -29,7 +29,7 @@ export default function Nav() {
         className="bg-green-500 hover:bg-green-400"
         onClick={async () => {
           setLoading(true)
-          const response = await axios.post("http://13.201.103.221:3000/submit", {
+          const response = await axios.post("https://code-execution.nagmaniupadhyay.com.np/submit", {
             code,
           });
           console.log(response.data);
